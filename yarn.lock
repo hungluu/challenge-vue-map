@@ -6800,6 +6800,11 @@ vendors@^1.0.3:
   resolved "https://registry.yarnpkg.com/vendors/-/vendors-1.0.4.tgz#e2b800a53e7a29b93506c3cf41100d16c4c4ad8e"
   integrity sha512-/juG65kTL4Cy2su4P8HjtkTxk6VmJDiOPBufWniqQ6wknac6jNiXS9vU+hO3wgusiyqWlzTbVHi0dyJqRONg3w==
 
+vue-content-loader@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/vue-content-loader/-/vue-content-loader-2.0.0.tgz#8e3ef340505ec2a3a45d14f6b8c5ca588b110505"
+  integrity sha512-4HtRASF3y1S03pcilwneVZzbowwKyDBfsPzP2JE35RMDIjsPuGnr93nO/2kP4mmqP4Qwmw6uCPd3SHBgJAi8Bw==
+
 vue-eslint-parser@^7.10.0:
   version "7.11.0"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-7.11.0.tgz#214b5dea961007fcffb2ee65b8912307628d0daf"

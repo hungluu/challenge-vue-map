@@ -1,59 +1,70 @@
 <template>
   <div class="hub-list">
     <div class="list__title">Hubs Near You</div>
-    <div class="list__items">
-      <div class="row list__item">
-        <div class="col">12 Jalan Kuras, Street 2081</div>
-        <div class="col item__label">B</div>
+    <div class="list__items" v-if="loading">
+      <div class="row list__item" v-for="n in 3" :key="n">
+        <hub-item-loader></hub-item-loader>
       </div>
-      <div class="row list__item">
-        <div class="col">12 Jalan Kuras, Street 2081</div>
-        <div class="col item__label">B</div>
+    </div>
+    <div class="list__items" v-else-if="items.length">
+      <div class="row list__item" v-for="item in items" :key="item.id">
+        <div class="col">{{ item.road }}</div>
+        <div class="col item__label">{{ item.id }}</div>
       </div>
-      <div class="row list__item">
-        <div class="col">12 Jalan Kuras, Street 2081</div>
-        <div class="col item__label">B</div>
-      </div>
-      <div class="row list__item">
-        <div class="col">12 Jalan Kuras, Street 2081</div>
-        <div class="col item__label">B</div>
-      </div>
-      <div class="row list__item">
-        <div class="col">12 Jalan Kuras, Street 2081</div>
-        <div class="col item__label">B</div>
-      </div>
-      <div class="row list__item">
-        <div class="col">12 Jalan Kuras, Street 2081</div>
-        <div class="col item__label">B</div>
-      </div>
+    </div>
+    <div class="list__items list__items--empty" v-else>
+      We're sorry but we can't find any hubs around here.
     </div>
     <div class="list__search">Search is disabled in this experiment</div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
+import HubItemLoader from './HubItemLoader.vue'
+import { IHub } from '../models'
 
 export default defineComponent({
-  name: 'HubList'
+  components: { HubItemLoader },
+  props: {
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    items: {
+      type: Array as PropType<IHub[]>,
+      required: true
+    }
+  }
 })
 </script>
 
 <style lang="scss" scoped>
 .hub-list {
+  display: flex;
+  flex-direction: column;
+
   .list__title {
     font-weight: bold;
     font-size: 1.2rem;
-    border-bottom: solid 1px $grey;
+    border-bottom: solid 2px $grey;
     padding: 0.5rem 1rem;
 
-    box-shadow: 0px -1px 2px 0px $grey;
+    flex: 0 0 auto;
   }
 
   .list__items {
     overflow-x: hidden;
     overflow-y: auto;
-    height: 11rem;
+    flex: 1 1 11rem;
+
+    &--empty {
+      text-align: center;
+      line-height: 5rem;
+      font-size: 1rem;
+      color: $grey-8;
+      flex: 1 1 5rem;
+    }
   }
 
   .list__item {
@@ -80,6 +91,8 @@ export default defineComponent({
     padding: 1rem;
     font-style: italic;
     text-align: center;
+
+    flex: 0 0 auto;
   }
 }
 </style>

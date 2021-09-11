@@ -1,19 +1,22 @@
 <template>
   <q-page class="hub-locator">
     <div class="locator__hubs">
-      <hub-list></hub-list>
+      <hub-list :items="this.$store.state.hubs.hubList" :loading="this.$store.state.hubs.isLoadingHubs"></hub-list>
     </div>
   </q-page>
 </template>
 
 <script lang="ts">
+import { LIST_HUBS } from 'src/store/hubs'
 import { defineComponent } from 'vue'
 import HubList from '../components/HubList.vue'
 
 export default defineComponent({
-  name: 'HubLocator',
   components: {
     HubList
+  },
+  mounted () {
+    void this.$store.dispatch('hubs/' + LIST_HUBS)
   }
 })
 </script>

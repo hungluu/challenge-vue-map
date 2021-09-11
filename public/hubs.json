@@ -1,0 +1,385 @@
+{
+  "data": [
+    {
+      "building": null,
+      "city": "Singapore",
+      "country": {
+        "currency_code": "SGD",
+        "currency_symbol": "S$",
+        "description": "Singapore",
+        "id": 193,
+        "name": "SG"
+      },
+      "floor_number": "03",
+      "postal_code": "570410",
+      "road": "410 Sin Ming Avenue",
+      "state": "Singapore",
+      "street_number": null,
+      "unit": "105",
+      "name": "410 Sin Ming Avenue S570410",
+      "id": 6058
+    },
+    {
+      "building": "The Springfield",
+      "city": "Singapore",
+      "country": {
+        "currency_code": "SGD",
+        "currency_symbol": "S$",
+        "description": "Singapore",
+        "id": 193,
+        "name": "SG"
+      },
+      "floor_number": null,
+      "postal_code": "486254",
+      "road": "19 Chempaka Kuning Link ",
+      "state": "Singapore",
+      "street_number": null,
+      "unit": null,
+      "name": "19 Chempaka Kuning Link  S486254",
+      "id": 6613
+    },
+    {
+      "building": "OSCAS",
+      "city": "Singapore",
+      "country": {
+        "currency_code": "SGD",
+        "currency_symbol": "S$",
+        "description": "Singapore",
+        "id": 193,
+        "name": "SG"
+      },
+      "floor_number": "01",
+      "postal_code": "699014",
+      "road": "59 Sungei Tengah Road",
+      "state": "Singapore",
+      "street_number": null,
+      "unit": "33",
+      "name": "59 Sungei Tengah Road S699014",
+      "id": 5661
+    },
+    {
+      "building": "Amtech Building",
+      "city": "Singapore",
+      "country": {
+        "currency_code": "SGD",
+        "currency_symbol": "S$",
+        "description": "Singapore",
+        "id": 193,
+        "name": "SG"
+      },
+      "floor_number": "02",
+      "postal_code": "575625",
+      "road": "159 Sin Ming Road",
+      "state": "Singapore",
+      "street_number": null,
+      "unit": "04",
+      "name": "159 Sin Ming Road S575625",
+      "id": 3682
+    },
+    {
+      "address_type_id": 2,
+      "building": "",
+      "city": "Singapore",
+      "country": {
+        "currency_code": "SGD",
+        "currency_symbol": "S$",
+        "description": "Singapore",
+        "id": 193,
+        "name": "SG"
+      },
+      "floor_number": "12",
+      "postal_code": "797485",
+      "road": "1 Fernvale Close ",
+      "state": "Singapore",
+      "street_number": null,
+      "unit": "01",
+      "name": "1 Fernvale Close  S797485",
+      "id": 2990
+    },
+    {
+      "building": null,
+      "city": "Singapore",
+      "country": {
+        "currency_code": "SGD",
+        "currency_symbol": "S$",
+        "description": "Singapore",
+        "id": 193,
+        "name": "SG"
+      },
+      "floor_number": null,
+      "postal_code": "440001",
+      "road": "1 Marine Terrace",
+      "state": "Singapore",
+      "street_number": null,
+      "unit": null,
+      "name": "1 Marine Terrace S440001",
+      "id": 3074
+    },
+    {
+      "building": null,
+      "city": "Singapore",
+      "country": {
+        "currency_code": "SGD",
+        "currency_symbol": "S$",
+        "description": "Singapore",
+        "id": 193,
+        "name": "SG"
+      },
+      "floor_number": "11",
+      "postal_code": "688207",
+      "road": "10 Choa Chu Kang Grove ",
+      "state": "Singapore",
+      "street_number": null,
+      "unit": "26",
+      "name": "10 Choa Chu Kang Grove  S688207",
+      "id": 4056
+    },
+    {
+      "building": "Parc Vera",
+      "city": "Singapore",
+      "country": {
+        "currency_code": "SGD",
+        "currency_symbol": "S$",
+        "description": "Singapore",
+        "id": 193,
+        "name": "SG"
+      },
+      "floor_number": "04",
+      "postal_code": "534037",
+      "road": "10 Hougang St 32",
+      "state": "Singapore",
+      "street_number": null,
+      "unit": "17",
+      "name": "10 Hougang St 32 S534037",
+      "id": 5488
+    },
+    {
+      "building": null,
+      "city": "Singapore",
+      "country": {
+        "currency_code": "SGD",
+        "currency_symbol": "S$",
+        "description": "Singapore",
+        "id": 193,
+        "name": "SG"
+      },
+      "floor_number": null,
+      "postal_code": "488259",
+      "road": "10 Jalan Segam",
+      "state": "Singapore",
+      "street_number": null,
+      "unit": null,
+      "name": "10 Jalan Segam S488259",
+      "id": 6389
+    },
+    {
+      "building": null,
+      "city": "Singapore",
+      "country": {
+        "currency_code": "SGD",
+        "currency_symbol": "S$",
+        "description": "Singapore",
+        "id": 193,
+        "name": "SG"
+      },
+      "floor_number": null,
+      "postal_code": "596493",
+      "road": "10 Toh Yi Road",
+      "state": "Singapore",
+      "street_number": null,
+      "unit": null,
+      "name": "10 Toh Yi Road S596493",
+      "id": 4990
+    },
+    {
+      "building": null,
+      "city": "Singapore",
+      "country": {
+        "currency_code": "SGD",
+        "currency_symbol": "S$",
+        "description": "Singapore",
+        "id": 193,
+        "name": "SG"
+      },
+      "floor_number": "07",
+      "postal_code": "534031",
+      "road": "10 Upper Serangoon Crescent",
+      "state": "Singapore",
+      "street_number": null,
+      "unit": "24",
+      "name": "10 Upper Serangoon Crescent S534031",
+      "id": 6662
+    },
+    {
+      "building": null,
+      "city": "Singapore",
+      "country": {
+        "currency_code": "SGD",
+        "currency_symbol": "S$",
+        "description": "Singapore",
+        "id": 193,
+        "name": "SG"
+      },
+      "floor_number": null,
+      "postal_code": "609602",
+      "road": "100 Jurong East Street 21",
+      "state": "Singapore",
+      "street_number": null,
+      "unit": null,
+      "name": "100 Jurong East Street 21 S609602",
+      "id": 4653
+    },
+    {
+      "building": null,
+      "city": "Singapore",
+      "country": {
+        "currency_code": "SGD",
+        "currency_symbol": "S$",
+        "description": "Singapore",
+        "id": 193,
+        "name": "SG"
+      },
+      "floor_number": "02",
+      "postal_code": "510101",
+      "road": "101 Pasir Ris Street 12",
+      "state": "Singapore",
+      "street_number": null,
+      "unit": "05",
+      "name": "101 Pasir Ris Street 12 S510101",
+      "id": 5977
+    },
+    {
+      "building": null,
+      "city": "Singapore",
+      "country": {
+        "currency_code": "SGD",
+        "currency_symbol": "S$",
+        "description": "Singapore",
+        "id": 193,
+        "name": "SG"
+      },
+      "floor_number": "21",
+      "postal_code": "320102",
+      "road": "102 Jalan Dusun",
+      "state": "Singapore",
+      "street_number": null,
+      "unit": "02",
+      "name": "102 Jalan Dusun S320102",
+      "id": 3292
+    },
+    {
+      "building": null,
+      "city": "Singapore",
+      "country": {
+        "currency_code": "SGD",
+        "currency_symbol": "S$",
+        "description": "Singapore",
+        "id": 193,
+        "name": "SG"
+      },
+      "floor_number": "09",
+      "postal_code": "342102",
+      "road": "102B Bidadari Park Drive",
+      "state": "Singapore",
+      "street_number": null,
+      "unit": "211",
+      "name": "102B Bidadari Park Drive S342102",
+      "id": 6730
+    },
+    {
+      "building": "Parc Riviera",
+      "city": "Singapore",
+      "country": {
+        "currency_code": "SGD",
+        "currency_symbol": "S$",
+        "description": "Singapore",
+        "id": 193,
+        "name": "SG"
+      },
+      "floor_number": "26",
+      "postal_code": "126754",
+      "road": "103 West Coast Vale",
+      "state": "Singapore",
+      "street_number": null,
+      "unit": "12",
+      "name": "103 West Coast Vale S126754",
+      "id": 6835
+    },
+    {
+      "building": null,
+      "city": "Singapore",
+      "country": {
+        "currency_code": "SGD",
+        "currency_symbol": "S$",
+        "description": "Singapore",
+        "id": 193,
+        "name": "SG"
+      },
+      "floor_number": "03",
+      "postal_code": "090104",
+      "road": "104 Bukit Purmei",
+      "state": "Singapore",
+      "street_number": null,
+      "unit": "106",
+      "name": "104 Bukit Purmei S090104",
+      "id": 6733
+    },
+    {
+      "building": null,
+      "city": "Singapore",
+      "country": {
+        "currency_code": "SGD",
+        "currency_symbol": "S$",
+        "description": "Singapore",
+        "id": 193,
+        "name": "SG"
+      },
+      "floor_number": "17",
+      "postal_code": "080104",
+      "road": "104 Spottiswoode Park Road",
+      "state": "Singapore",
+      "street_number": null,
+      "unit": "114",
+      "name": "104 Spottiswoode Park Road S080104",
+      "id": 6623
+    },
+    {
+      "building": null,
+      "city": "Singapore",
+      "country": {
+        "currency_code": "SGD",
+        "currency_symbol": "S$",
+        "description": "Singapore",
+        "id": 193,
+        "name": "SG"
+      },
+      "floor_number": "07",
+      "postal_code": "341106",
+      "road": "106A Bidadari Park Drive",
+      "state": "Singapore",
+      "street_number": null,
+      "unit": "28",
+      "name": "106A Bidadari Park Drive S341106",
+      "id": 6282
+    },
+    {
+      "building": null,
+      "city": "Singapore",
+      "country": {
+        "currency_code": "SGD",
+        "currency_symbol": "S$",
+        "description": "Singapore",
+        "id": 193,
+        "name": "SG"
+      },
+      "floor_number": "03",
+      "postal_code": "751106",
+      "road": "106A Canberra Street",
+      "state": "Singapore",
+      "street_number": null,
+      "unit": "415",
+      "name": "106A Canberra Street S751106",
+      "id": 5581
+    }
+  ]
+}

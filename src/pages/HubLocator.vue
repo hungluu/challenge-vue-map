@@ -31,6 +31,7 @@ export default defineComponent({
   margin-left: 50%;
   transform: translateX(-50%);
 
-  box-shadow: 0px -1px 3px 0px $grey;
+  border: solid 1px $grey;
+  box-shadow: 0px -1px 5px 0px rgba($grey, 0.5);
 }
 </style>

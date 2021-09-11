@@ -19,12 +19,19 @@ const actions: ActionTree<IHubsState, IRootState> = {
     try {
       commit(SET_IS_LOADING, true)
 
-      // TODO: Move API call to a service class
+      // TODO: Move API call to HubService class
       // TODO: Automatically resolve URL instead of fixed relative URL
       const response = await api.get('/hubs.json')
-      const hubs = response.data.data as IHub[]
+      const hubs = response.data.data as IHub[] || []
 
-      commit(SET_HUBS, hubs)
+      // TODO: Move ultility function to HubService class
+      // TODO: Handle after Z character, maybe AA - AZ ?
+      const labelledHubs = hubs.map((hub, idx) => ({
+        ...hub,
+        label: idx ? String.fromCharCode('A'.charCodeAt(0) + idx) : 'A'
+      }))
+
+      commit(SET_HUBS, labelledHubs)
     } catch (err) {
       // TODO: Handle error
     } finally {

@@ -9,7 +9,7 @@
     <div class="list__items" v-else-if="items.length">
       <div class="row list__item" v-for="item in items" :key="item.id">
         <div class="col">{{ item.road }}</div>
-        <div class="col item__label">{{ item.id }}</div>
+        <div class="col item__label">{{ item.label }}</div>
       </div>
     </div>
     <div class="list__items list__items--empty" v-else>
@@ -47,7 +47,7 @@ export default defineComponent({
   .list__title {
     font-weight: bold;
     font-size: 1.2rem;
-    border-bottom: solid 2px $grey;
+    box-shadow: 0px 1px 5px 0px rgba($grey, 0.7);
     padding: 0.5rem 1rem;
 
     flex: 0 0 auto;

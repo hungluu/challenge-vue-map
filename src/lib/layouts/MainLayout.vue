@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import pkg from '../../package.json'
+import pkg from '../../../package.json'
 import { defineComponent } from 'vue'
 
 export default defineComponent({

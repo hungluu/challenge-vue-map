@@ -1,7 +1,8 @@
-import { api } from 'src/boot/axios'
-import { IHub, IHubsState, IRootState } from 'src/models'
+import { IHub, IHubsState, IRootState } from 'src/lib/models'
+import HubService from 'src/services/HubService'
 import { ActionTree, MutationTree } from 'vuex'
 
+// Mutations
 const SET_HUBS = 'SET_HUBS'
 const SET_IS_LOADING = 'SET_IS_LOADING'
 const mutations: MutationTree<IHubsState> = {
@@ -13,16 +14,14 @@ const mutations: MutationTree<IHubsState> = {
   }
 }
 
+// Actions
 export const LIST_HUBS = 'LIST_HUBS'
 const actions: ActionTree<IHubsState, IRootState> = {
   [LIST_HUBS]: async ({ commit }) => {
     try {
       commit(SET_IS_LOADING, true)
 
-      // TODO: Move API call to HubService class
-      // TODO: Automatically resolve URL instead of fixed relative URL
-      const response = await api.get('/hubs.json')
-      const hubs = response.data.data as IHub[] || []
+      const hubs = await HubService.listHubs()
 
       // TODO: Move ultility function to HubService class
       // TODO: Handle after Z character, maybe AA - AZ ?
@@ -38,6 +37,12 @@ const actions: ActionTree<IHubsState, IRootState> = {
       commit(SET_IS_LOADING, false)
     }
   }
+}
+
+const namespace = 'hubs'
+// Exposed dispatchable actions
+export const dispatches = {
+  LIST_HUBS: `${namespace}/${LIST_HUBS}`
 }
 
 export default {

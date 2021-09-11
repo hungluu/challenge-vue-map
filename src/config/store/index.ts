@@ -1,5 +1,5 @@
 import { store } from 'quasar/wrappers'
-import { IRootState } from 'src/models'
+import { IRootState } from 'src/lib/models'
 import { InjectionKey } from 'vue'
 import {
   createStore,
@@ -7,7 +7,7 @@ import {
   useStore as vuexUseStore
 } from 'vuex'
 
-import hubs from './hubs'
+import hubs from 'src/hubs/store'
 
 /*
  * If not building with SSR mode, you can

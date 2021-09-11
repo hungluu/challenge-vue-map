@@ -3,11 +3,11 @@ import { RouteRecordRaw } from 'vue-router'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('src/lib/layouts/MainLayout.vue'),
     children: [
       {
         path: '',
-        component: () => import('src/pages/HubLocator.vue'),
+        component: () => import('src/hubs/HubLocator.vue'),
         meta: {
           title: 'Locate Hub'
         }
@@ -19,7 +19,7 @@ const routes: RouteRecordRaw[] = [
   // but you can also remove it
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/Error404.vue')
+    component: () => import('src/lib/errors/Error404.vue')
   }
 ]
 

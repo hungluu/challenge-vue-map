@@ -7,16 +7,16 @@
 </template>
 
 <script lang="ts">
-import { LIST_HUBS } from 'src/store/hubs'
+import { dispatches } from './store'
 import { defineComponent } from 'vue'
-import HubList from '../components/HubList.vue'
+import HubList from './HubList.vue'
 
 export default defineComponent({
   components: {
     HubList
   },
   mounted () {
-    void this.$store.dispatch('hubs/' + LIST_HUBS)
+    void this.$store.dispatch(dispatches.LIST_HUBS)
   }
 })
 </script>

@@ -1,5 +1,5 @@
 import { route } from 'quasar/wrappers'
-import { IRootState } from 'src/models'
+import { IRootState } from 'src/lib/models'
 import {
   createMemoryHistory,
   createRouter,

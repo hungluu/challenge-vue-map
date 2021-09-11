@@ -9,9 +9,23 @@
 /* eslint-env node */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { configure } = require('quasar/wrappers')
+const { resolve, relative } = require('path')
+
+const src = subPath => resolve(__dirname, 'src', subPath)
+const defaultBootFilesPath = src('boot')
+const getBootPath = subPath =>
+  relative(
+    defaultBootFilesPath,
+    src(subPath)
+  )
 
 module.exports = configure(function (ctx) {
   return {
+    sourceFiles: {
+      router: 'src/config/router',
+      store: 'src/config/store',
+    },
+
     // https://v2.quasar.dev/quasar-cli/supporting-ts
     supportTS: {
       tsCheckerConfig: {
@@ -29,7 +43,7 @@ module.exports = configure(function (ctx) {
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli/boot-files
     boot: [
-      'axios'
+      getBootPath('lib/axios')
     ],
 
     // https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css

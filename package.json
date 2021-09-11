@@ -2,7 +2,7 @@
   "name": "challenge-vue-map",
   "version": "0.0.1",
   "description": "A map built with VueJS",
-  "productName": "Vue Map Challenge",
+  "productName": "Vue Map",
   "author": "Hung Luu <hungluu2106@gmail.com>",
   "private": true,
   "scripts": {

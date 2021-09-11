@@ -22,7 +22,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import HubItemLoader from './HubItemLoader.vue'
-import { IHub } from '../models'
+import { IHub } from '../lib/models'
 
 export default defineComponent({
   components: { HubItemLoader },

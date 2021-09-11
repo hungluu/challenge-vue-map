@@ -36,10 +36,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .q-header {
-  box-shadow: 0px 1px 5px 0px rgba(50, 50, 50, 0.3);
+  box-shadow: 0px 1px 5px 0px $grey;
 }
 .q-toolbar {
-  background: #fefefe;
+  background: $light;
   height: 70px;
   padding-top: 10px;
 }

@@ -7,7 +7,7 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '',
-        component: () => import('pages/Index.vue'),
+        component: () => import('src/pages/HubLocator.vue'),
         meta: {
           title: 'Locate Hub'
         }

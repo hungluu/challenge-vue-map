@@ -1,9 +1,9 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header>
       <q-toolbar>
         <q-toolbar-title>
-          Vue Map
+          {{ headerTitle }}
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
@@ -15,9 +15,38 @@
 </template>
 
 <script lang="ts">
+import pkg from '../../package.json'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'MainLayout'
+  name: 'MainLayout',
+  computed: {
+    headerTitle (): string {
+      return this.$route.meta.title as string || pkg.productName
+    },
+    pageTitle (): string {
+      return [pkg.productName, this.$route.meta.title].filter(Boolean).join(' | ')
+    }
+  },
+  created () {
+    document.title = this.pageTitle
+  }
 })
 </script>
+
+<style lang="scss" scoped>
+.q-header {
+  box-shadow: 0px 1px 5px 0px rgba(50, 50, 50, 0.3);
+}
+.q-toolbar {
+  background: #fefefe;
+  height: 70px;
+  padding-top: 10px;
+}
+.q-toolbar__title {
+  color: $dark;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1rem;
+}
+</style>

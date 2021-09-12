@@ -7,7 +7,11 @@
       </div>
     </div>
     <div class="list__items" v-else-if="items.length">
-      <div class="row list__item" v-for="item in items" :key="item.id">
+      <div class="row list__item"
+        :class="{ 'list__item--active': item.id === selectedItemId }"
+        v-for="item in items"
+        :key="item.id"
+        @click="typeof onItemClick === 'function' && onItemClick(item)">
         <div class="col">{{ item.road }}</div>
         <div class="col item__label">
           <img :src="item.label" :alt="item.road" width="28" height="28">
@@ -36,6 +40,14 @@ export default defineComponent({
     items: {
       type: Array as PropType<IHub[]>,
       required: true
+    },
+    selectedItemId: Number,
+    onItemClick: Function
+  },
+  computed: {
+    rendererItems () {
+      // sort items by distance to center (current position)
+
     }
   }
 })
@@ -74,6 +86,13 @@ export default defineComponent({
     padding: 1rem 1.5rem;
     display: flex;
     align-items: center;
+
+    cursor: pointer;
+
+    &--active {
+      background: $marker-bg;
+      color: $light;
+    }
   }
 
   .item__label {

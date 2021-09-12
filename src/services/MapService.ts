@@ -34,6 +34,15 @@ export default class MapService {
     }
   }
 
+  getDistance (from: IPosition, to: IPosition) {
+    const earthRadius = 6371
+    const delta = 0.5 - Math.cos((to.lat - from.lat) * Math.PI) / 2 +
+      Math.cos(from.lat * Math.PI) * Math.cos(to.lat * Math.PI) *
+      (1 - Math.cos((to.lng - from.lng) * Math.PI)) / 2
+
+    return 2 * earthRadius * Math.asin(Math.sqrt(delta))
+  }
+
   static async setup (app: any): Promise<MapService> {
     app.use(VueGoogleMaps, {
       load: {

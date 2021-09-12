@@ -11,11 +11,13 @@
       <GMapMarker v-for="item in renderedItems"
         :key="item.id"
         :position="positions[item.id]"
-        :icon="item.label" />
+        :icon="item.id !== selectedItemId ? item.label : undefined"
+        @click="typeof onItemClick === 'function' && onItemClick(item)"
+        :clickable="true" />
     </GMapMap>
     <div class="hub-map__popup" v-if="this.isLoadingMarkers">
-      <q-spinner-puff color="light" size="1.2em" />
-      <div class="popup__message">Loading markers ...</div>
+      <q-spinner-puff color="grey-1" size="1.2em" />
+      <div class="popup__message">Loading markers</div>
     </div>
   </div>
 </template>
@@ -36,7 +38,9 @@ export default defineComponent({
     items: {
       type: Array as PropType<IHub[]>,
       required: true
-    }
+    },
+    selectedItemId: Number,
+    onItemClick: Function
   },
   data (): IData {
     return {
@@ -70,10 +74,16 @@ export default defineComponent({
         this.isLoadingMarkers = false
       })
     })
+
+    watch(() => this.selectedItemId, (selectedItemId: any) => {
+      if (has(this.positions, selectedItemId)) {
+        this.focusedPosition = this.positions[selectedItemId]
+      }
+    })
   },
   computed: {
     renderedItems (): IHub[] {
-      return this.items.filter(item => has(this.positions, item.id))
+      return this.items.filter(item => has(this.positions, item.id) && item.label)
     }
   }
 })

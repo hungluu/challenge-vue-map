@@ -20,6 +20,7 @@ export interface IHub extends ILocation {
 export interface IHubsState {
   isLoadingHubs: boolean
   hubList: IHub[]
+  selectedHubId?: number
 }
 
 export interface IRootState {

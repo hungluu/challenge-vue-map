@@ -1,10 +1,18 @@
 <template>
   <q-page class="hub-locator">
     <div class="locator__map">
-      <HubMap :items="$store.state.hubs.hubList"></HubMap>
+      <HubMap
+        :items="$store.state.hubs.hubList"
+        :selectedItemId="$store.state.hubs.selectedHubId"
+        :onItemClick="toggleSelectHub"></HubMap>
     </div>
     <div class="locator__hubs">
-      <HubList :items="$store.state.hubs.hubList" :loading="$store.state.hubs.isLoadingHubs"></HubList>
+      <HubList
+        :items="$store.state.hubs.hubList"
+        :loading="$store.state.hubs.isLoadingHubs"
+        :selectedItemId="$store.state.hubs.selectedHubId"
+        :onItemClick="toggleSelectHub"
+        ></HubList>
     </div>
   </q-page>
 </template>
@@ -14,6 +22,7 @@ import { dispatchers } from './store'
 import { defineComponent } from 'vue'
 import HubList from './HubList.vue'
 import HubMap from './HubMap.vue'
+import { IHub } from 'src/lib/models'
 
 export default defineComponent({
   components: {
@@ -22,6 +31,16 @@ export default defineComponent({
   },
   mounted () {
     void this.$store.dispatch(dispatchers.LIST_HUBS)
+  },
+  methods: {
+    toggleSelectHub (hub: IHub) {
+      void this.$store.dispatch(
+        dispatchers.SELECT_HUB,
+        hub.id !== this.$store.state.hubs.selectedHubId
+          ? hub.id
+          : null
+      )
+    }
   }
 })
 </script>

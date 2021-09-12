@@ -7,18 +7,42 @@ export default class HubService {
       // TODO: Automatically resolve URL instead of fixed relative URL
       const reponse = await api.get('hubs.json')
 
-      // TODO: Handle after Z character, maybe AA - AZ ?
       const hubs = (reponse.data.data as IHub[] || [])
-        .map((hub, idx) => ({
+        .map(hub => ({
           ...hub,
-          address: [hub.road, hub.state].filter(Boolean).join(' '),
-          label: idx ? String.fromCharCode('A'.charCodeAt(0) + idx) : 'A'
+          address: [hub.road, hub.state].filter(Boolean).join(' ')
         }))
+        .map((hub, idx) =>
+          this.labelHub(hub, idx ? String.fromCharCode('A'.charCodeAt(0) + idx) : 'A')
+        )
 
       return hubs
     } catch (err) {
       // TODO: Handle error
       return []
+    }
+  }
+
+  private labelHub (hub: IHub, labelText: string): IHub {
+    if (hub.label !== undefined) {
+      return hub
+    }
+
+    const svg = `<svg height="32" width="32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+      <defs>
+        <filter id="shadow">
+          <feDropShadow dx="0.1" dy="0.6" stdDeviation="0.2"/>
+        </filter>
+      </defs>
+
+      <circle cx="16" cy="16" r="14" stroke-width="2" stroke="white" fill="#F19727" style="filter:url(#shadow);" />
+      <text x="10" y="21" fill="#fefefe">${labelText}</text>
+    </svg>`
+    const label = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml;charset=utf-8' }))
+
+    return {
+      ...hub,
+      label
     }
   }
 }

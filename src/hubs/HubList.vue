@@ -9,7 +9,9 @@
     <div class="list__items" v-else-if="items.length">
       <div class="row list__item" v-for="item in items" :key="item.id">
         <div class="col">{{ item.road }}</div>
-        <div class="col item__label">{{ item.label }}</div>
+        <div class="col item__label">
+          <img :src="item.label" :alt="item.road" width="28" height="28">
+        </div>
       </div>
     </div>
     <div class="list__items list__items--empty" v-else>
@@ -76,8 +78,6 @@ export default defineComponent({
 
   .item__label {
     flex: 0 0 1.5rem;
-    background: $marker-bg;
-    color: $marker-fg;
     text-align: center;
     margin-left: 0.5rem;
     border-radius: 50%;

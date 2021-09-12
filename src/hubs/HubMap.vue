@@ -8,7 +8,10 @@
       }"
       class="hub-map__gmap"
     >
-      <GMapMarker v-for="item in renderedItems" :key="item.id" :position="positions[item.id]" />
+      <GMapMarker v-for="item in renderedItems"
+        :key="item.id"
+        :position="positions[item.id]"
+        :icon="item.label" />
     </GMapMap>
     <div class="hub-map__popup" v-if="this.isLoadingMarkers">
       <q-spinner-puff color="light" size="1.2em" />

@@ -23,7 +23,7 @@ module.exports = configure(function (ctx) {
   return {
     sourceFiles: {
       router: 'src/config/router',
-      store: 'src/config/store',
+      store: 'src/config/store'
     },
 
     // https://v2.quasar.dev/quasar-cli/supporting-ts
@@ -43,7 +43,8 @@ module.exports = configure(function (ctx) {
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli/boot-files
     boot: [
-      getBootPath('lib/axios')
+      getBootPath('lib/axios'),
+      getBootPath('services')
     ],
 
     // https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css

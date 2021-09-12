@@ -1,5 +1,4 @@
 import { IHub, IHubsState, IRootState } from 'src/lib/models'
-import HubService from 'src/services/HubService'
 import { ActionTree, MutationTree } from 'vuex'
 
 // Mutations
@@ -17,20 +16,10 @@ const mutations: MutationTree<IHubsState> = {
 // Actions
 export const LIST_HUBS = 'LIST_HUBS'
 const actions: ActionTree<IHubsState, IRootState> = {
-  [LIST_HUBS]: async ({ commit }) => {
+  [LIST_HUBS]: async ({ commit, rootGetters: { $services: { HubService } } }) => {
     try {
       commit(SET_IS_LOADING, true)
-
-      const hubs = await HubService.listHubs()
-
-      // TODO: Move ultility function to HubService class
-      // TODO: Handle after Z character, maybe AA - AZ ?
-      const labelledHubs = hubs.map((hub, idx) => ({
-        ...hub,
-        label: idx ? String.fromCharCode('A'.charCodeAt(0) + idx) : 'A'
-      }))
-
-      commit(SET_HUBS, labelledHubs)
+      commit(SET_HUBS, await HubService.listHubs())
     } catch (err) {
       // TODO: Handle error
     } finally {

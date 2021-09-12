@@ -1,0 +1,5 @@
+export { default as Promise } from 'bluebird'
+export { default as get } from 'lodash-es/get'
+export { default as zipObject } from 'lodash-es/zipObject'
+export { default as map } from 'lodash-es/map'
+export { default as has } from 'lodash-es/has'

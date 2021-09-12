@@ -6,20 +6,29 @@
   "author": "Hung Luu <hungluu2106@gmail.com>",
   "private": true,
   "scripts": {
+    "start": "quasar dev",
+    "build": "quasar build",
     "lint": "eslint --ext .js,.ts,.vue ./",
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
+    "@fawmi/vue-google-maps": "^0.9.1",
+    "@googlemaps/js-api-loader": "^1.12.2",
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
+    "bluebird": "^3.7.2",
     "core-js": "^3.6.5",
+    "lodash-es": "^4.17.21",
     "quasar": "^2.0.0",
     "vue-content-loader": "^2.0.0",
+    "vue3-google-map": "^0.8.2",
     "vuex": "^4.0.1"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",
     "@quasar/app": "^3.0.0",
+    "@types/bluebird": "^3.5.36",
+    "@types/lodash-es": "^4.17.5",
     "@types/node": "^12.20.21",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "@typescript-eslint/parser": "^4.16.1",

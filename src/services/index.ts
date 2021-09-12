@@ -1,11 +1,20 @@
-import map from 'lodash-es/map'
+import { map } from 'src/lib'
 import { boot } from 'quasar/wrappers'
 import HubService from './HubService'
-import GMapsServices from './GMapsServices'
+import MapService from './MapService'
 
 const services = {
   HubService,
-  GMapsServices
+  MapService
+}
+
+declare module '@vue/runtime-core' {
+  interface ComponentCustomProperties {
+    $services: {
+      HubService: HubService,
+      MapService: MapService
+    }
+  }
 }
 
 export default boot(async ({ app, store }) => {

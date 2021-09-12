@@ -1,6 +1,7 @@
 <template>
   <q-page class="hub-locator">
     <div class="locator__map">
+      <HubMap :items="$store.state.hubs.hubList"></HubMap>
     </div>
     <div class="locator__hubs">
       <HubList :items="$store.state.hubs.hubList" :loading="$store.state.hubs.isLoadingHubs"></HubList>

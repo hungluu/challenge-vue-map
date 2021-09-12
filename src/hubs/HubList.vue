@@ -3,7 +3,7 @@
     <div class="list__title">Hubs Near You</div>
     <div class="list__items" v-if="loading">
       <div class="row list__item" v-for="n in 3" :key="n">
-        <hub-item-loader></hub-item-loader>
+        <HubItemLoader></HubItemLoader>
       </div>
     </div>
     <div class="list__items" v-else-if="items.length">
@@ -22,7 +22,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import HubItemLoader from './HubItemLoader.vue'
-import { IHub } from '../lib/models'
+import { IHub } from 'src/lib/models'
 
 export default defineComponent({
   components: { HubItemLoader },

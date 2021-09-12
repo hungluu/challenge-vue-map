@@ -41,7 +41,7 @@ const actions: ActionTree<IHubsState, IRootState> = {
 
 const namespace = 'hubs'
 // Exposed dispatchable actions
-export const dispatches = {
+export const dispatchers = {
   LIST_HUBS: `${namespace}/${LIST_HUBS}`
 }
 

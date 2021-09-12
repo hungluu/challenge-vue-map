@@ -15,17 +15,18 @@
 </template>
 
 <script lang="ts">
-import pkg from '../../../package.json'
 import { defineComponent } from 'vue'
 
+// TODO: Move this to build env
+const APP_NAME = 'Vue Map'
 export default defineComponent({
   name: 'MainLayout',
   computed: {
     headerTitle (): string {
-      return this.$route.meta.title as string || pkg.productName
+      return this.$route.meta.title as string || APP_NAME
     },
     pageTitle (): string {
-      return [pkg.productName, this.$route.meta.title].filter(Boolean).join(' | ')
+      return [APP_NAME, this.$route.meta.title].filter(Boolean).join(' | ')
     }
   },
   created () {

@@ -11,7 +11,7 @@
         Calculating distances
       </small>
     </div>
-    <div class="list__items" v-if="loading">
+    <div class="list__items" v-if="loading || (userPosition && isLoadingPositions)">
       <div class="row list__item" v-for="n in 3" :key="n">
         <HubItemLoader></HubItemLoader>
       </div>
@@ -30,7 +30,8 @@
       </div>
     </div>
     <div class="list__items list__items--empty" v-else>
-      We're sorry but we can't find any hubs around here.
+      <div>We're sorry but we can't find any hubs around here.</div>
+      <q-btn color="primary" class="glossy" rounded size="sm" @click="resetList()" v-if="items.length">Go back to our 1st hub</q-btn>
     </div>
     <div class="list__search">Search is disabled in this experiment</div>
   </div>
@@ -62,9 +63,14 @@ export default defineComponent({
     isLoadingPositions: Boolean,
     userPosition: Object as PropType<IPosition>
   },
+  data () {
+    return {
+      shouldIgnoreDistances: false
+    }
+  },
   computed: {
     rendererItems () {
-      if (this.userPosition === undefined) {
+      if (this.userPosition === undefined || this.shouldIgnoreDistances) {
         return this.items
       }
 
@@ -74,7 +80,7 @@ export default defineComponent({
               this.userPosition as IPosition,
               this.positions[item.id]
           )
-          : 99999
+          : this.$config.NEAR_DISTANCE + 1
 
         return distance
       })
@@ -82,7 +88,15 @@ export default defineComponent({
       // sort items by distance to center (current position)
       return sortBy(this.items, (_, idx) => distances[idx])
         // remove hub which is too far or hasn't been fetched position
-        .filter((_, idx) => distances[idx] < 15000)
+        .filter((_, idx) => distances[idx] < this.$config.NEAR_DISTANCE)
+    }
+  },
+  methods: {
+    resetList () {
+      if (this.items.length && this.onItemClick) {
+        this.shouldIgnoreDistances = true
+        this.onItemClick(this.items[0])
+      }
     }
   }
 })
@@ -110,10 +124,11 @@ export default defineComponent({
 
     &--empty {
       text-align: center;
-      line-height: 5rem;
+      line-height: 2em;
       font-size: 1rem;
       color: $grey-8;
       flex: 1 1 5rem;
+      padding-top: 0.5em;
     }
   }
 

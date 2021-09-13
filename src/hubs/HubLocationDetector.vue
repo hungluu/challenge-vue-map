@@ -6,8 +6,8 @@
       </q-card-section>
 
       <q-card-actions align="right">
-        <q-btn flat label="Cancel" color="grey-7" v-close-popup size="sm" />
-        <q-btn  class="glossy" push label="ALLOW" color="primary" size="sm" v-close-popup @click="onAccept" />
+        <q-btn flat label="LATER" color="grey-7" v-close-popup size="sm" />
+        <q-btn  class="glossy" push label="ACCEPT" color="deep-orange" size="sm" v-close-popup @click="onAccept" />
       </q-card-actions>
     </q-card>
   </q-dialog>

@@ -63,7 +63,7 @@ export default class MapService {
   static async setup (app: any): Promise<MapService> {
     app.use(VueGoogleMaps, {
       load: {
-        key: 'AIzaSyCvChIp0ynkb_9vNmt1k0EIT-YeAg7Iy3E',
+        key: 'AIzaSyCpHa5pJDICypdd9DZT2t9kkCtN2aWTugU',
         libraries: 'geometry'
       }
     })

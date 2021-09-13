@@ -9,7 +9,9 @@
       class="hub-map__gmap"
     >
       <GMapMarker v-if="userPosition"
-        :position="userPosition" />
+        :position="userPosition"
+        :animation="4"
+        :icon="userPositionIcon" />
       <GMapMarker v-for="item in renderedItems"
         :key="item.id"
         :position="positions[item.id]"
@@ -62,6 +64,9 @@ export default defineComponent({
   computed: {
     renderedItems (): IHub[] {
       return this.items.filter(item => has(this.positions, item.id) && item.label)
+    },
+    userPositionIcon (): string {
+      return require('assets/user-location.png')
     }
   }
 })

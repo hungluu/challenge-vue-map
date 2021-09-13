@@ -988,13 +988,6 @@
   dependencies:
     marker-clusterer-plus "^2.1.4"
 
-"@googlemaps/js-api-loader@^1.12.2":
-  version "1.12.2"
-  resolved "https://registry.yarnpkg.com/@googlemaps/js-api-loader/-/js-api-loader-1.12.2.tgz#1a198b5b9ba3f329fdaa0471c576424b10250ecc"
-  integrity sha512-SBamjN2x4UyYAJIoIh48aFQJC0DGBfTuvZrfT9iWrRp4H1Y4Ks5MqAzK7lncnso495gx+xDT2IJtiTVXYBxwlQ==
-  dependencies:
-    fast-deep-equal "^3.1.3"
-
 "@humanwhocodes/config-array@^0.5.0":
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.5.0.tgz#1407967d4c6eecd7388f83acf1eaf4d0c6e58ef9"
@@ -6887,11 +6880,6 @@ vue-style-loader@4.1.3:
   dependencies:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
-
-vue3-google-map@^0.8.2:
-  version "0.8.2"
-  resolved "https://registry.yarnpkg.com/vue3-google-map/-/vue3-google-map-0.8.2.tgz#3a53a0e9971a57f2be64800fc16548af7f2d6115"
-  integrity sha512-xd8Wr2QkgN4CNDjxvJhLLkf0Cvy3zV7xt7ac0AHm70xGqXkaBSTRQ19jtTV4/Ym/par1uXj6UB55yXSPvWtXkA==
 
 vue@3.2.4:
   version "3.2.4"

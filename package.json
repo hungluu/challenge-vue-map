@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "@fawmi/vue-google-maps": "^0.9.1",
-    "@googlemaps/js-api-loader": "^1.12.2",
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
     "bluebird": "^3.7.2",
@@ -22,7 +21,6 @@
     "lodash-es": "^4.17.21",
     "quasar": "^2.0.0",
     "vue-content-loader": "^2.0.0",
-    "vue3-google-map": "^0.8.2",
     "vuex": "^4.0.1"
   },
   "devDependencies": {

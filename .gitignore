@@ -31,3 +31,9 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+
+.firebase/
+*.log
+.env
+.env.*
+!.env.example

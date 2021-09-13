@@ -1,3 +1,4 @@
+import { handleError } from 'src/lib/handleError'
 import { IHub, IHubsState, IPosition, IRootState } from 'src/lib/models'
 import { ActionTree, MutationTree } from 'vuex'
 
@@ -36,7 +37,7 @@ const actions: ActionTree<IHubsState, IRootState> = {
       commit(SET_IS_LOADING, true)
       commit(SET_HUBS, await HubService.listHubs())
     } catch (err) {
-      // TODO: Handle error
+      handleError(err)
     } finally {
       commit(SET_IS_LOADING, false)
     }
@@ -51,7 +52,7 @@ const actions: ActionTree<IHubsState, IRootState> = {
     try {
       commit(SET_USER_POSITION, await MapService.getUserPosition())
     } catch (err) {
-      // TODO: Handle error
+      handleError(err)
     }
   }
 }

@@ -31,9 +31,11 @@ export default boot(async ({ app, store }) => {
       }
     }
 
-    $services[ServiceClass.name] = setupResult instanceof ServiceClass
+    $services[ServiceClass.ID] = setupResult instanceof ServiceClass
       ? setupResult
       : new ServiceClass(app)
+
+    console.info(`√ Service ready: ${ServiceClass.ID as string}`)
   }))
 
   app.config.globalProperties.$services = $services

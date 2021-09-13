@@ -1,11 +1,14 @@
 import VueGoogleMaps from '@fawmi/vue-google-maps/src/main.js'
 import { IPosition } from 'src/lib/models'
 import { has, get } from 'src/lib'
+import { config } from 'src/config'
 
 // TODO: Move cached positions into persisted location
 const cachedPositions: {[key: string]: IPosition} = {}
 
 export default class MapService {
+  static ID = 'MapService'
+
   private readonly geocoder: any
 
   // eslint-disable-next-line no-useless-constructor
@@ -63,7 +66,7 @@ export default class MapService {
   static async setup (app: any): Promise<MapService> {
     app.use(VueGoogleMaps, {
       load: {
-        key: 'AIzaSyCpHa5pJDICypdd9DZT2t9kkCtN2aWTugU',
+        key: config.GOOGLE_API_KEY,
         libraries: 'geometry'
       }
     })

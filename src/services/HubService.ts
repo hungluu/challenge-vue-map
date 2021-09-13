@@ -1,13 +1,16 @@
 import { api } from 'src/lib/axios'
+import { handleError } from 'src/lib/handleError'
 import { IHub } from 'src/lib/models'
 
 export default class HubService {
+  static ID = 'HubService'
+
   async listHubs (): Promise<IHub[]> {
     try {
       // TODO: Automatically resolve URL instead of fixed relative URL
-      const reponse = await api.get('hubs.json')
+      const response = await api.get('hubs.json')
 
-      const hubs = (reponse.data.data as IHub[] || [])
+      const hubs = (response.data.data as IHub[] || [])
         .map(hub => ({
           ...hub,
           address: [hub.road, hub.state].filter(Boolean).join(' ')
@@ -18,7 +21,7 @@ export default class HubService {
 
       return hubs
     } catch (err) {
-      // TODO: Handle error
+      handleError(err)
       return []
     }
   }

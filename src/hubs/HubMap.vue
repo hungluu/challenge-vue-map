@@ -15,7 +15,7 @@
         @click="typeof onItemClick === 'function' && onItemClick(item)"
         :clickable="true" />
     </GMapMap>
-    <div class="hub-map__popup" v-if="this.isLoadingMarkers">
+    <div class="hub-map__popup" v-if="this.isLoadingPositions">
       <q-spinner-puff color="grey-1" size="1.2em" />
       <div class="popup__message">Loading markers</div>
     </div>
@@ -23,15 +23,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, watch } from 'vue'
-import { Promise, get, has } from 'src/lib'
+import { defineComponent, PropType } from 'vue'
+import { has } from 'src/lib'
 import { IHub, IPosition } from 'src/lib/models'
-
-interface IData {
-  focusedPosition: IPosition
-  positions: {[id: number]: IPosition}
-  isLoadingMarkers: boolean
-}
 
 export default defineComponent({
   props: {
@@ -39,47 +33,25 @@ export default defineComponent({
       type: Array as PropType<IHub[]>,
       required: true
     },
+    onFocus: {
+      type: Function,
+      required: true
+    },
+    focusedPosition: Object as PropType<IPosition>,
     selectedItemId: Number,
-    onItemClick: Function
+    onItemClick: Function,
+    positions: {
+      type: Object,
+      required: true
+    },
+    isLoadingPositions: Boolean
   },
-  data (): IData {
-    return {
-      focusedPosition: { lat: 1.290270, lng: 103.851959 },
-      positions: {},
-      isLoadingMarkers: false
-    }
-  },
-  created () {
-    watch(() => this.items, async items => {
-      const ids = items.map(item => item.id)
-
-      this.isLoadingMarkers = true
-      return await Promise.map(items, async (item, idx) => {
-        await Promise.delay(idx * 200) // small delay to prevent rate-limit of geocoding API
-        return this.$services.MapService.getPosition(item.address).then(position => {
-          if (idx === 0) {
-            this.focusedPosition = position
-          }
-
-          if (idx < ids.length) {
-            this.positions = {
-              ...this.positions,
-              [get(ids, idx)]: position
-            }
-          }
-        })
-      }, {
-        concurrency: 3
-      }).then(() => {
-        this.isLoadingMarkers = false
-      })
-    })
-
-    watch(() => this.selectedItemId, (selectedItemId: any) => {
+  watch: {
+    selectedItemId: function (selectedItemId: any) {
       if (has(this.positions, selectedItemId)) {
-        this.focusedPosition = this.positions[selectedItemId]
+        this.onFocus(this.positions[selectedItemId])
       }
-    })
+    }
   },
   computed: {
     renderedItems (): IHub[] {

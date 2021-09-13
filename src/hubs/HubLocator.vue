@@ -4,7 +4,12 @@
       <HubMap
         :items="$store.state.hubs.hubList"
         :selectedItemId="$store.state.hubs.selectedHubId"
-        :onItemClick="toggleSelectHub"></HubMap>
+        :onItemClick="toggleSelectHub"
+        :onFocus="focusPosition"
+        :positions="positions"
+        :focusedPosition="$store.state.hubs.focusedPosition"
+        :isLoadingPositions="isLoadingPositions"
+      ></HubMap>
     </div>
     <div class="locator__hubs">
       <HubList
@@ -12,7 +17,10 @@
         :loading="$store.state.hubs.isLoadingHubs"
         :selectedItemId="$store.state.hubs.selectedHubId"
         :onItemClick="toggleSelectHub"
-        ></HubList>
+        :focusedPosition="$store.state.hubs.focusedPosition"
+        :positions="positions"
+        :isLoadingPositions="isLoadingPositions"
+      ></HubList>
     </div>
   </q-page>
 </template>
@@ -22,7 +30,13 @@ import { dispatchers } from './store'
 import { defineComponent } from 'vue'
 import HubList from './HubList.vue'
 import HubMap from './HubMap.vue'
-import { IHub } from 'src/lib/models'
+import { get, Promise } from 'src/lib'
+import { IHub, IPosition } from 'src/lib/models'
+
+interface IData {
+  positions: {[id: number]: IPosition}
+  isLoadingPositions: boolean
+}
 
 export default defineComponent({
   components: {
@@ -32,6 +46,38 @@ export default defineComponent({
   mounted () {
     void this.$store.dispatch(dispatchers.LIST_HUBS)
   },
+  data (): IData {
+    return {
+      positions: {},
+      isLoadingPositions: false
+    }
+  },
+  watch: {
+    '$store.state.hubs.hubList': async function (items: IHub[]) {
+      const ids = items.map(item => item.id)
+
+      this.isLoadingPositions = true
+      return await Promise.map(items, async (item, idx) => {
+        await Promise.delay(idx * 200) // small delay to prevent rate-limit of geocoding API
+        return this.$services.MapService.getPosition(item.address).then(position => {
+          if (idx === 0) {
+            this.focusPosition(position)
+          }
+
+          if (idx < ids.length) {
+            this.positions = {
+              ...this.positions,
+              [get(ids, idx)]: position
+            }
+          }
+        })
+      }, {
+        concurrency: 3
+      }).then(() => {
+        this.isLoadingPositions = false
+      })
+    }
+  },
   methods: {
     toggleSelectHub (hub: IHub) {
       void this.$store.dispatch(
@@ -40,6 +86,9 @@ export default defineComponent({
           ? hub.id
           : null
       )
+    },
+    focusPosition (position: IPosition) {
+      void this.$store.dispatch(dispatchers.FOCUS_POSITION, position)
     }
   }
 })

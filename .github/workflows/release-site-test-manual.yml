@@ -1,0 +1,47 @@
+name: Release Site to Test (Manual)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release_site_to_qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Retrieve source code
+        uses: actions/checkout@v2
+      - name: 👀 Check revision
+        run: echo "Checkout ${GITHUB_REF#refs/heads/} ${GITHUB_SHA}"
+      - name: 🏡 Setup Node 14.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+      - name: 🔥 Setup firebase
+        uses: pocket-apps/action-setup-firebase@v2
+        with:
+          firebase-token: "${{ secrets.FIREBASE_TOKEN }}"
+      - name: 🧾 Fetch env
+        run: echo -e "${{ secrets.SITE_ENV }}" > .env
+      - name: 📥 Cache builds
+        uses: actions/cache@v2
+        with:
+          path: |
+            dist
+            .quasar
+          key: ${{ runner.os }}-quasar-build
+          restore-keys: |
+            ${{ runner.os }}-quasar-build
+      - name: 🚚 Install quasar
+        run: yarn global add @quasar/cli --non-interactive
+        env:
+          CI: true
+      - name: 🚚 Install dependencies
+        run: yarn install --frozen-lockfile --non-interactive
+        env:
+          CI: true
+      - name: 🏗️ Build
+        run: yarn build
+        env:
+          CI: true
+      - name: ✈️ Release to hosting
+        run: yarn deploy

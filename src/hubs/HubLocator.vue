@@ -8,6 +8,7 @@
         :onFocus="focusPosition"
         :positions="positions"
         :focusedPosition="$store.state.hubs.focusedPosition"
+        :userPosition="$store.state.hubs.userPosition"
         :isLoadingPositions="isLoadingPositions"
       ></HubMap>
     </div>
@@ -17,11 +18,12 @@
         :loading="$store.state.hubs.isLoadingHubs"
         :selectedItemId="$store.state.hubs.selectedHubId"
         :onItemClick="toggleSelectHub"
-        :focusedPosition="$store.state.hubs.focusedPosition"
+        :userPosition="$store.state.hubs.userPosition"
         :positions="positions"
         :isLoadingPositions="isLoadingPositions"
       ></HubList>
     </div>
+    <HubLocationDetector :onAccept="getUserLocation" />
   </q-page>
 </template>
 
@@ -30,6 +32,7 @@ import { dispatchers } from './store'
 import { defineComponent } from 'vue'
 import HubList from './HubList.vue'
 import HubMap from './HubMap.vue'
+import HubLocationDetector from './HubLocationDetector.vue'
 import { get, Promise } from 'src/lib'
 import { IHub, IPosition } from 'src/lib/models'
 
@@ -41,7 +44,8 @@ interface IData {
 export default defineComponent({
   components: {
     HubList,
-    HubMap
+    HubMap,
+    HubLocationDetector
   },
   mounted () {
     void this.$store.dispatch(dispatchers.LIST_HUBS)
@@ -89,6 +93,9 @@ export default defineComponent({
     },
     focusPosition (position: IPosition) {
       void this.$store.dispatch(dispatchers.FOCUS_POSITION, position)
+    },
+    getUserLocation () {
+      void this.$store.dispatch(dispatchers.DETECT_LOCATION)
     }
   }
 })

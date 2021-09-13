@@ -8,6 +8,8 @@
       }"
       class="hub-map__gmap"
     >
+      <GMapMarker v-if="userPosition"
+        :position="userPosition" />
       <GMapMarker v-for="item in renderedItems"
         :key="item.id"
         :position="positions[item.id]"
@@ -44,13 +46,17 @@ export default defineComponent({
       type: Object,
       required: true
     },
-    isLoadingPositions: Boolean
+    isLoadingPositions: Boolean,
+    userPosition: Object as PropType<IPosition>
   },
   watch: {
-    selectedItemId: function (selectedItemId: any) {
+    selectedItemId (selectedItemId: any) {
       if (has(this.positions, selectedItemId)) {
         this.onFocus(this.positions[selectedItemId])
       }
+    },
+    userPosition (userPosition: IPosition) {
+      this.onFocus(userPosition)
     }
   },
   computed: {

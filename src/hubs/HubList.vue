@@ -6,7 +6,7 @@
         <q-spinner-puff color="primary" size="1em" />
         Loading hubs
       </small>
-      <small class="title__status" v-if="isLoadingPositions">
+      <small class="title__status" v-if="userPosition && isLoadingPositions">
         <q-spinner-puff color="primary" size="1em" />
         Calculating distances
       </small>
@@ -16,7 +16,7 @@
         <HubItemLoader></HubItemLoader>
       </div>
     </div>
-    <div class="list__items" v-else-if="items.length">
+    <div class="list__items" v-else-if="rendererItems.length">
       <div class="row list__item"
         :class="{ 'list__item--active': item.id === selectedItemId }"
         v-for="item in rendererItems"
@@ -38,7 +38,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { sortBy, has } from 'src/lib'
+import { sortBy, has, map } from 'src/lib'
 import HubItemLoader from './HubItemLoader.vue'
 import { IHub, IPosition } from 'src/lib/models'
 
@@ -55,30 +55,34 @@ export default defineComponent({
     },
     selectedItemId: Number,
     onItemClick: Function,
-    focusedPosition: Object as PropType<IPosition>,
     positions: {
       type: Object,
       required: true
     },
-    isLoadingPositions: Boolean
+    isLoadingPositions: Boolean,
+    userPosition: Object as PropType<IPosition>
   },
   computed: {
     rendererItems () {
-      if (this.focusedPosition === undefined) {
+      if (this.userPosition === undefined) {
         return this.items
       }
 
-      // sort items by distance to center (current position)
-      return sortBy(this.items, item => {
+      const distances = map(this.items, item => {
         const distance = has(this.positions, item.id)
           ? this.$services.MapService.getDistance(
-              this.focusedPosition as IPosition,
+              this.userPosition as IPosition,
               this.positions[item.id]
           )
-          : 999999
+          : 99999
 
         return distance
       })
+
+      // sort items by distance to center (current position)
+      return sortBy(this.items, (_, idx) => distances[idx])
+        // remove hub which is too far or hasn't been fetched position
+        .filter((_, idx) => distances[idx] < 15000)
     }
   }
 })

@@ -35,18 +35,36 @@ export default class MapService {
   }
 
   getDistance (from: IPosition, to: IPosition) {
-    const earthRadius = 6371
-    const delta = 0.5 - Math.cos((to.lat - from.lat) * Math.PI) / 2 +
-      Math.cos(from.lat * Math.PI) * Math.cos(to.lat * Math.PI) *
-      (1 - Math.cos((to.lng - from.lng) * Math.PI)) / 2
+    // const earthRadius = 6371
+    // const delta = 0.5 - Math.cos((to.lat - from.lat) * Math.PI) / 2 +
+    //   Math.cos(from.lat * Math.PI) * Math.cos(to.lat * Math.PI) *
+    //   (1 - Math.cos((to.lng - from.lng) * Math.PI)) / 2
 
-    return 2 * earthRadius * Math.asin(Math.sqrt(delta))
+    // return 2 * earthRadius * Math.asin(Math.sqrt(delta))
+    return this.mapsApi.geometry.spherical.computeDistanceBetween(
+      new this.mapsApi.LatLng(from.lat, from.lng),
+      new this.mapsApi.LatLng(to.lat, to.lng)
+    )
+  }
+
+  getUserPosition (): Promise<IPosition> {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(function (location) {
+        const coords: any = get(location, 'coords', {})
+
+        resolve({
+          lat: coords.latitude,
+          lng: coords.longitude
+        })
+      }, reject)
+    })
   }
 
   static async setup (app: any): Promise<MapService> {
     app.use(VueGoogleMaps, {
       load: {
-        key: 'AIzaSyCvChIp0ynkb_9vNmt1k0EIT-YeAg7Iy3E'
+        key: 'AIzaSyCvChIp0ynkb_9vNmt1k0EIT-YeAg7Iy3E',
+        libraries: 'geometry'
       }
     })
 

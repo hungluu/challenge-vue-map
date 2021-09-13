@@ -21,6 +21,7 @@ export interface IHubsState {
   isLoadingHubs: boolean
   hubList: IHub[]
   selectedHubId?: number
+  userPosition?: IPosition
   focusedPosition: IPosition
 }
 

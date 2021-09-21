@@ -35,6 +35,7 @@ import HubMap from './HubMap.vue'
 import HubLocationDetector from './HubLocationDetector.vue'
 import { get, Promise } from 'src/lib'
 import { IHub, IPosition } from 'src/lib/models'
+import { handleError } from 'src/lib/handleError'
 
 interface IData {
   positions: {[id: number]: IPosition}
@@ -62,7 +63,8 @@ export default defineComponent({
 
       this.isLoadingPositions = true
       return await Promise.map(items, async (item, idx) => {
-        await Promise.delay(idx * 200) // small delay to prevent rate-limit of geocoding API
+        // The small delay is removed since we avoided calling Google Maps Geolocation API
+        // await Promise.delay(idx * 0) // small delay to prevent rate-limit of geocoding API
         return this.$services.MapService.getPosition(item.address).then(position => {
           if (idx === 0) {
             this.focusPosition(position)
@@ -74,6 +76,8 @@ export default defineComponent({
               [get(ids, idx)]: position
             }
           }
+        }).catch(err => {
+          handleError(err)
         })
       }, {
         concurrency: 3

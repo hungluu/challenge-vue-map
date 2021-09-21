@@ -2,21 +2,23 @@ import VueGoogleMaps from '@fawmi/vue-google-maps/src/main.js'
 import { IPosition } from 'src/lib/models'
 import { has, get } from 'src/lib'
 import { config } from 'src/config'
-
-// TODO: Move cached positions into persisted location
-const cachedPositions: {[key: string]: IPosition} = {}
+import { api } from 'src/lib/axios'
 
 export default class MapService {
   static ID = 'MapService'
 
   private readonly geocoder: any
+  // TODO: Move cached positions into persisted location
+  private cachedPositions: {[key: string]: IPosition} = {}
 
   // eslint-disable-next-line no-useless-constructor
   constructor (private readonly mapsApi: any) {
     this.geocoder = new mapsApi.Geocoder()
   }
 
-  getPosition (address: string): Promise<IPosition> {
+  async getPosition (address: string): Promise<IPosition> {
+    const cachedPositions = await this.getCachedPositions()
+
     if (has(cachedPositions, address)) {
       return Promise.resolve(cachedPositions[address])
     } else {
@@ -24,11 +26,14 @@ export default class MapService {
         this.geocoder.geocode({ address }, function (results: any, status: string) {
           if (status === 'OK') {
             const location: any = get(results, '0.geometry.location')
-
-            resolve({
+            const position = {
               lat: location.lat(),
               lng: location.lng()
-            })
+            }
+
+            cachedPositions[address] = position
+
+            resolve(position)
           } else {
             reject(Error(`MapService:${status} Cannot fetch position for address "${address}"`))
           }
@@ -61,6 +66,17 @@ export default class MapService {
         })
       }, reject)
     })
+  }
+
+  private async getCachedPositions (): Promise<{[key: string]: IPosition}> {
+    if (!Object.keys(this.cachedPositions).length) {
+      // TODO: These prefetch positions are used to avoid calling Google Maps Geolocation API
+      // which is prohibited in our country
+      const res = await api.get('cachedPositions.json')
+      this.cachedPositions = get(res, 'data', {})
+    }
+
+    return this.cachedPositions
   }
 
   static async setup (app: any): Promise<MapService> {
